@@ -30,8 +30,6 @@ const instagram = {
 
     await loginButton[0].click()
 
-    // await instagram.page.waitForNavigation();
-
     await instagram.page.waitFor(2500);
 
     await instagram.page.type('input[name="username"]', username, {delay: 100});
@@ -60,23 +58,13 @@ const instagram = {
 
     agoraNaoButton = await instagram.page.$x('//button[contains(text(), "Agora não")]');
     await agoraNaoButton[0].click()
+  },
 
-    await instagram.page.waitFor(3500);
-
-    // const adicionarSpan = await instagram.page.waitForSelector('span[aria-label="Nova publicação"]');
-    // await adicionarSpan.click()
-
-    // const input = await instagram.page.$('input[type="file"]')
-    // await input.uploadFile('./foto.jpg')
-    // await instagram.page.waitFor(2500);
-    // instagram.page.on('dialog', dia => dia.dismiss())
-
-    // await instagram.page.waitFor(2500);
-
+  post: async(image, text) => {
     const futureFileChooser = instagram.page.waitForFileChooser();
     await instagram.page.click('span[aria-label="Nova publicação"]');
     const fileChooser = await futureFileChooser;
-    await fileChooser.accept(['./foto.jpg']);
+    await fileChooser.accept([image]);
 
     await instagram.page.waitFor(2500);
 
@@ -85,13 +73,12 @@ const instagram = {
 
     const selector = 'textarea[aria-label="Escreva uma legenda..."]'
     await instagram.page.waitForSelector(selector)
-    await instagram.page.type(selector, 'Legenda para a foto...')
+    await instagram.page.type(selector, text)
 
     const compartilharButton = await instagram.page.$x('//button[contains(text(), "Compartilhar")]');
-    await compartilharButton[0].click()
+    // await compartilharButton[0].click()
 
     debugger;
-
   }
 }
 

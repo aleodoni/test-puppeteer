@@ -4,4 +4,6 @@ const ig = require('./instagram');
   await ig.initialize();
 
   await ig.login('', '');
+
+  await ig.post('./foto.jpg', 'ZACA')
 })()
