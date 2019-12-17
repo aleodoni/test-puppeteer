@@ -82,7 +82,13 @@ const instagram = {
 
     avancarButton = await instagram.page.$x('//button[contains(text(), "Avançar")]');
     await avancarButton[0].click()
-    
+
+    const selector = 'textarea[aria-label="Escreva uma legenda..."]'
+    await instagram.page.waitForSelector(selector)
+    await instagram.page.type(selector, 'Legenda para a foto...')
+
+    const compartilharButton = await instagram.page.$x('//button[contains(text(), "Compartilhar")]');
+    await compartilharButton[0].click()
 
     debugger;
 
